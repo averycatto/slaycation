@@ -678,6 +678,31 @@ export default function LogbookPage() {
                             </p>
 
                             <div className="flex flex-wrap items-center gap-2">
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setSelectedVisitorIds((current) => [
+                                            ...current,
+                                            ...filteredVisitors
+                                                .map((visitor) => visitor.id)
+                                                .filter((id) => !current.includes(id)),
+                                        ]);
+                                    }}
+                                    disabled={filteredVisitors.length === 0}
+                                    className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700 transition hover:bg-blue-100 disabled:cursor-not-allowed disabled:opacity-50"
+                                >
+                                    Select All
+                                </button>
+
+                                <button
+                                    type="button"
+                                    onClick={() => setSelectedVisitorIds([])}
+                                    disabled={selectedVisitorIds.length === 0}
+                                    className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
+                                >
+                                    Deselect All
+                                </button>
+
                                 {selectedVisitorIds.length > 0 && (
                                     <button
                                         type="button"
@@ -908,7 +933,9 @@ export default function LogbookPage() {
 
                                         <th className="px-6 py-4">Status</th>
 
-                                        <th className="px-6 py-4 text-right print:hidden">Action</th>
+                                        <th className="px-6 py-4 text-right print:hidden">
+                                            Action
+                                        </th>
                                     </tr>
                                 </thead>
 
@@ -1010,7 +1037,7 @@ export default function LogbookPage() {
                         </div>
                     )}
                 </section>
-            </div>
-        </main>
+            </div >
+        </main >
     );
 }
